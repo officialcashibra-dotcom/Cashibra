@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Salary Structure — Cashibra</title>
+<style>
+  :root{--bg:#fff9f3;--card:#fff;--accent:#0b3d91;--muted:#555}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#123}
+  header{background:var(--accent);color:#fff;padding:18px;font-weight:700}
+  .wrap{max-width:920px;margin:28px auto;padding:18px}
+  .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 20px rgba(11,61,145,0.05);margin-bottom:14px}
+  h1{color:var(--accent);margin:0 0 8px 0}
+  label{display:block;margin-top:10px;font-weight:700;color:var(--muted)}
+  input[type=number],select{width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin-top:6px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .col{flex:1;min-width:160px}
+  button{margin-top:12px;padding:10px 14px;border-radius:10px;border:none;background:var(--accent);color:#fff;cursor:pointer}
+  table{width:100%;border-collapse:collapse;margin-top:10px}
+  td,th{padding:8px;border-bottom:1px solid #f2f2f2;text-align:left}
+  .note{font-size:13px;color:var(--muted)}
+  a.back{display:inline-block;margin-top:14px;color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<header>Cashibra — Salary Structure</header>
+<div class="wrap">
+  <div class="card">
+    <h1>What is CTC and Salary Breakdown?</h1>
+    <p>CTC = Cost To Company (total annual expense employer pays). Your monthly take-home (net pay) is usually less because of deductions like taxes and employee PF.</p>
+    <div class="note">This is a simplified model for learning.</div>
+  </div>
+
+  <div class="card">
+    <h2>Salary Calculator (simple)</h2>
+
+    <label>Enter annual CTC (₹)</label>
+    <input id="ctc" type="number" placeholder="e.g., 480000" />
+
+    <div class="row">
+      <div class="col">
+        <label>Basic % of CTC</label>
+        <input id="basicPct" type="number" value="40" />
+      </div>
+      <div class="col">
+        <label>HRA % of Basic</label>
+        <input id="hraPct" type="number" value="50" />
+      </div>
+    </div>
+
+    <label>Employer PF % (on basic)</label>
+    <input id="pfPct" type="number" value="12" />
+
+    <button onclick="calcSalary()">Show Breakdown</button>
+
+    <div id="break" style="margin-top:12px;display:none">
+      <h3>Estimated Annual / Monthly Breakdown</h3>
+      <table>
+        <tr><th>Component</th><th>Annual</th><th>Monthly</th></tr>
+        <tbody id="breakBody"></tbody>
+      </table>
+      <div class="note">This is an estimate. Real payslips have more items (allowances, reimbursements).</div>
+    </div>
+  </div>
+
+  <a class="back" href="index.html">⬅ Back to Home</a>
+</div>
+
+<script>
+function calcSalary(){
+  const ctc = Number(document.getElementById('ctc').value) || 0;
+  const basicPct = Number(document.getElementById('basicPct').value)/100 || 0.4;
+  const hraPct = Number(document.getElementById('hraPct').value)/100 || 0.5;
+  const pfPct = Number(document.getElementById('pfPct').value)/100 || 0.12;
+
+  // simple model:
+  const basicAnnual = ctc * basicPct;
+  const hraAnnual = basicAnnual * hraPct;
+  const employerPFAnnual = basicAnnual * pfPct;
+  const otherAllowances = ctc - (basicAnnual + hraAnnual + employerPFAnnual);
+
+  const monthly = (v)=> '₹' + Math.round(v/12).toLocaleString();
+  const annual = (v)=> '₹' + Math.round(v).toLocaleString();
+
+  const body = document.getElementById('breakBody');
+  body.innerHTML = `
+    <tr><td>Basic Salary</td><td>${annual(basicAnnual)}</td><td>${monthly(basicAnnual)}</td></tr>
+    <tr><td>HRA</td><td>${annual(hraAnnual)}</td><td>${monthly(hraAnnual)}</td></tr>
+    <tr><td>Employer PF</td><td>${annual(employerPFAnnual)}</td><td>${monthly(employerPFAnnual)}</td></tr>
+    <tr><td>Other Allowances</td><td>${annual(otherAllowances)}</td><td>${monthly(otherAllowances)}</td></tr>
+    <tr><th>Total CTC</th><th>${annual(ctc)}</th><th>${monthly(ctc)}</th></tr>
+  `;
+  document.getElementById('break').style.display = 'block';
+}
+</script>
+</body>
+</html>

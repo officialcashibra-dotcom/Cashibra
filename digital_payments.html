@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Payments – Interactive Lesson</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f6ff;
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+        header {
+            background: #1a73e8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 { color: #1656c2; }
+
+        /* Puzzle Styles */
+        .puzzle-area {
+            background: #e8f1ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .puzzle-option {
+            background: #fff;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+        .puzzle-option:hover {
+            border-color: #1a73e8;
+            background: #f3f8ff;
+        }
+        .correct {
+            border-color: green !important;
+            background: #d9ffdf !important;
+        }
+        .wrong {
+            border-color: red !important;
+            background: #ffe2e2 !important;
+        }
+
+        .summary {
+            background: #fff0c2;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>DIGITAL PAYMENTS – INTERACTIVE LESSON</header>
+
+<div class="container">
+
+    <div class="box">
+        <h2>What Are Digital Payments?</h2>
+        <p>Digital payments are transactions made without physical cash. You use a phone, card, or online method to pay.</p>
+        <ul>
+            <li>UPI (Google Pay, PhonePe, Paytm)</li>
+            <li>Debit / Credit Card</li>
+            <li>Net Banking</li>
+            <li>QR Code Scanning</li>
+            <li>Online Wallets</li>
+        </ul>
+    </div>
+
+    <div class="box puzzle-area">
+        <h2>🧩 Mini Puzzle: Which of these is NOT a digital payment?</h2>
+
+        <div class="puzzle-option" onclick="check(this, false)">Paying with ₹50 cash note</div>
+        <div class="puzzle-option" onclick="check(this, true)">Scanning QR code</div>
+        <div class="puzzle-option" onclick="check(this, true)">Using UPI app</div>
+
+        <div id="result"></div>
+    </div>
+
+    <div class="summary" id="lessonSummary">
+        <h3>Lesson Summary 🎓</h3>
+        <p>You learned that digital payments are fast, safe, and require no physical cash. They leave a record, help you track expenses, and allow you to pay from anywhere.</p>
+        <p><b>Cash</b> is the only non-digital option in the puzzle above!</p>
+    </div>
+
+</div>
+
+<script>
+let answered = false;
+function check(element, isDigital){
+    if(answered) return;
+    answered = true;
+
+    if(!isDigital){
+        element.classList.add('correct');
+        document.getElementById('result').innerHTML = "<p style='color:green'><b>Correct!</b> Cash is NOT a digital payment.</p>";
+    } else {
+        element.classList.add('wrong');
+        document.getElementById('result').innerHTML = "<p style='color:red'><b>Wrong!</b> This IS a digital payment.</p>";
+    }
+
+    document.getElementById('lessonSummary').style.display = 'block';
+}
+</script>
+
+<!-- 🚀 UPGRADED INTERACTION AREA ADDED BELOW -->
+
+<section id="interactiveZone" style="margin-top:50px; background:#f0f7ff; padding:30px; border-radius:15px;">
+  <h2 style="color:#0b3d91;">🚀 Digital Payments Adventure Mode</h2>
+  <p style="font-size:18px; max-width:700px; margin:auto;">
+    Learn digital payments by actually <b>using them in a story mode!</b> Choose what to do next and see what happens.
+  </p>
+
+  <div id="storyBox" style="margin-top:25px; background:white; padding:20px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.1); font-size:18px; max-width:700px; margin:auto;">
+    You are at a shop. You want to buy a snack for ₹40. How do you want to pay?
+  </div>
+
+  <div id="choices" style="margin-top:20px; display:flex; flex-direction:column; gap:12px; max-width:500px; margin:auto;">
+    <button onclick="choose('upi')" style="padding:12px; border:none; border-radius:8px; background:#0b3d91; color:white; font-size:16px; cursor:pointer;">Use UPI 📱</button>
+    <button onclick="choose('card')" style="padding:12px; border:none; border-radius:8px; background:#0975d8; color:white; font-size:16px; cursor:pointer;">Use Debit Card 💳</button>
+    <button onclick="choose('cash')" style="padding:12px; border:none; border-radius:8px; background:#055bb5; color:white; font-size:16px; cursor:pointer;">Use Cash 💵</button>
+  </div>
+</section>
+
+<script>
+function choose(method) {
+  let story = document.getElementById('storyBox');
+
+  if(method === 'upi') {
+    story.innerHTML = "You scan the QR code... 🔍<br><br><b>Processing...</b> ⏳<br><br>Payment Successful! 🎉<br>You earned +10 XP for using digital payments safely.";
+  }
+  else if(method === 'card') {
+    story.innerHTML = "You insert your debit card into the machine... 💳<br><br>Enter PIN... 🔢<br><br><b>Approved!</b> 🎉<br>You earned +5 XP for using card payments correctly.";
+  }
+  else if(method === 'cash') {
+    story.innerHTML = "Cash payment is fine, but digital is faster! 💵<br><br>You hand over the cash and get change.<br><br>You earned +1 XP.";
+  }
+}
+</script>
+
+</body>
+</html>

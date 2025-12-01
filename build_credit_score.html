@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Build Your Credit Score — Cashibra</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;background:#090f1a;color:#dff;
+  font-family:Arial;
+}
+header{
+  background:#17233a;padding:20px;text-align:center;
+  font-size:26px;font-weight:800;
+  color:#00ffe1;text-shadow:0 0 8px #0ff;
+}
+.wrap{max-width:900px;margin:20px auto;padding:20px}
+.card{
+  background:#131a2e;border:2px solid #25355a;padding:18px;
+  border-radius:12px;margin-bottom:16px;
+  box-shadow:0 0 12px #0e1629;
+}
+h2{color:#40e8ff}
+button{
+  background:#00ffd5;border:none;padding:10px 16px;
+  border-radius:8px;color:#001821;font-weight:800;cursor:pointer;
+  margin-top:8px;
+}
+.story{
+  background:#0b1220;padding:12px;border-radius:10px;
+  border:1px solid #2ba9ff;margin-top:10px;
+}
+#creditScore{
+  width:100%;height:22px;background:#162134;
+  border-radius:12px;margin-top:10px;overflow:hidden;
+}
+#bar{
+  height:100%;width:40%;background:#00ff95;
+  transition:.4s;
+}
+.xp{display:none;background:#0f2d1f;padding:12px;
+    margin-top:14px;border-radius:10px;color:#7affc3;
+    border:2px solid #00ffa6;text-align:center;font-weight:900;}
+</style>
+
+</head>
+<body>
+
+<header>Cashibra — Build Your Credit Score</header>
+
+<div class="wrap">
+
+<div class="card">
+<h2>Meet Knight Credor 🛡️</h2>
+<p>He teaches young heroes how to build a strong **credit score** — the number banks use to trust you.</p>
+<div class="story">“Young hero, make wise choices. Each action affects your score!”</div>
+</div>
+
+<div class="card">
+<h2>Your Credit Score</h2>
+<div id="creditScore"><div id="bar"></div></div>
+<p id="scoreText">📊 Score: 400 (Poor)</p>
+</div>
+
+<div class="card">
+<h2>Choose Your Actions</h2>
+
+<button onclick="payOnTime()">Pay phone bill ON TIME</button>
+<button onclick="missPayment()">Miss payment for 2 months</button>
+<button onclick="lowUtil()">Use only 20% of credit</button>
+<button onclick="highUtil()">Max out card to 100%</button>
+<button onclick="closeOld()">Close your oldest account</button>
+<button onclick="keepOld()">Keep old account active</button>
+
+<div class="story" id="storyBox">Your choices will appear here...</div>
+
+<div class="xp" id="xpGain">+40 XP Earned!</div>
+
+</div>
+
+</div>
+
+<script>
+let score=400;
+
+function updateScore(change,msg){
+  score+=change;
+  if(score<300) score=300;
+  if(score>900) score=900;
+
+  document.getElementById("bar").style.width=(score/9)+"%";
+  document.getElementById("scoreText").innerText="📊 Score: "+score;
+  document.getElementById("storyBox").innerText=msg;
+
+  document.getElementById("xpGain").style.display="block";
+  setTimeout(()=>document.getElementById("xpGain").style.display="none",1200);
+}
+
+function payOnTime(){
+  updateScore(+40,"Knight Credor: “Excellent! Paying on time increases trust.”");
+}
+function missPayment(){
+  updateScore(-80,"Credor: “Ouch! Missing payments heavily damages score.”");
+}
+function lowUtil(){
+  updateScore(+30,"Credor: “Smart! Using low credit means you are responsible.”");
+}
+function highUtil(){
+  updateScore(-50,"Credor: “You used all your credit! Dangerous.”");
+}
+function closeOld(){
+  updateScore(-35,"Credor: “Closing old accounts erases history. Not wise.”");
+}
+function keepOld(){
+  updateScore(+20,"Credor: “Great! Long history improves your score.”");
+}
+</script>
+
+</body>
+</html>

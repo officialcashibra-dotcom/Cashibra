@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Investing 101 — Cashibra</title>
+<style>
+  :root{--bg:#0f1724;--card:#0b1220;--accent:#2dd4bf;--muted:#9aa}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#e6f7f6}
+  header{background:#071428;padding:18px;color:var(--accent);font-weight:700}
+  .wrap{max-width:980px;margin:26px auto;padding:18px}
+  .card{background:var(--card);padding:16px;border-radius:12px;margin-bottom:14px;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+  h1{margin:0;color:var(--accent)}
+  p{line-height:1.6;color:#d6f3ee}
+  label{display:block;margin-top:10px;color:var(--muted)}
+  input[type=number],select{width:100%;padding:10px;border-radius:8px;border:none;margin-top:8px;background:#071826;color:#e6f7f6}
+  button{margin-top:12px;padding:10px;border-radius:8px;border:none;background:var(--accent);color:#012;cursor:pointer;font-weight:700}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .col{flex:1;min-width:150px}
+  .result{margin-top:12px;padding:12px;border-radius:8px;background:#052b28;color:var(--accent);font-weight:700}
+  a.back{display:inline-block;margin-top:14px;color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<header>Cashibra — Investing 101</header>
+
+<div class="wrap">
+  <div class="card">
+    <h1>Why Invest?</h1>
+    <p>Investing helps your money grow faster than simply saving it. Over time, compounding and steady contributions can turn small amounts into significant sums.</p>
+  </div>
+
+  <div class="card">
+    <h2>Where can you invest?</h2>
+    <p><b>Stocks:</b> Own a tiny piece of a company — high risk, high return potential.<br>
+       <b>Mutual Funds:</b> Many people pool money and a fund manager buys a set of stocks — good for beginners.<br>
+       <b>SIP (Systematic Investment Plan):</b> Invest a fixed amount every month into a mutual fund — helps average out highs and lows.<br>
+       <b>ETFs:</b> Like mutual funds but traded on stock exchanges.</p>
+  </div>
+
+  <div class="card">
+    <h2>SIP & Lump-sum Calculator (interactive)</h2>
+    <label>Monthly SIP amount (₹)</label>
+    <input id="sipAmt" type="number" placeholder="e.g., 1000" />
+    <label>Expected annual return (%)</label>
+    <input id="rate" type="number" placeholder="e.g., 10" />
+    <label>Years</label>
+    <input id="years" type="number" placeholder="e.g., 10" />
+    <button onclick="calcSIP()">Calculate SIP</button>
+
+    <div id="sipResult" class="result" style="display:none"></div>
+  </div>
+
+  <div class="card">
+    <h2>Risk vs Return (interactive)</h2>
+    <p>Move the slider to pick your risk appetite. Higher risk can mean higher returns but also more volatility.</p>
+    <label>Risk level: <span id="riskText">Medium</span></label>
+    <input id="riskSlider" type="range" min="1" max="5" value="3" oninput="updateRisk()" />
+    <div id="riskNote" style="margin-top:10px;color:#bfeee6"></div>
+  </div>
+
+  <a class="back" href="index.html">⬅ Back to Home</a>
+</div>
+
+<script>
+// SIP formula: Future Value of series: FV = P * [ ( (1 + r)^n - 1 ) / r ] * (1 + r)
+// where r = monthly rate, n = months, P = monthly SIP
+function calcSIP(){
+  const P = Number(document.getElementById('sipAmt').value) || 0;
+  const annual = Number(document.getElementById('rate').value) || 0;
+  const years = Number(document.getElementById('years').value) || 0;
+  if(P <= 0 || annual <= 0 || years <= 0){
+    alert('Enter valid numbers');
+    return;
+  }
+  const r = annual/100/12;
+  const n = years*12;
+  const fv = P * ( (Math.pow(1+r, n) - 1) / r ) * (1 + r);
+  const invested = P * n;
+  document.getElementById('sipResult').style.display = 'block';
+  document.getElementById('sipResult').innerHTML = `Invested: ₹${Math.round(invested).toLocaleString()}<br>Estimated value: ₹${Math.round(fv).toLocaleString()} (at ${annual}% p.a.)`;
+}
+
+function updateRisk(){
+  const val = Number(document.getElementById('riskSlider').value);
+  const text = document.getElementById('riskText');
+  const note = document.getElementById('riskNote');
+  if(val <= 1){ text.innerText = 'Very Low'; note.innerText = 'Low returns, safe (e.g., Savings, FDs). Good if you dislike risk.'; }
+  else if(val === 2){ text.innerText = 'Low'; note.innerText = 'Lower risk, lower returns (e.g., short-term debt funds).'; }
+  else if(val === 3){ text.innerText = 'Medium'; note.innerText = 'Balanced: mix of equity & debt (mutual funds). Good for many teens.'; }
+  else if(val === 4){ text.innerText = 'High'; note.innerText = 'Higher potential returns, more ups and downs (stocks, equity funds).'; }
+  else { text.innerText = 'Very High'; note.innerText = 'Very volatile — big swings. Only for experienced investors.'; }
+}
+// init
+updateRisk();
+</script>
+</body>
+</html>

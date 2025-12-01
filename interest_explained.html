@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interest Explained</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f7ff;
+        padding: 20px;
+        margin: 0;
+        text-align: center;
+    }
+
+    header {
+        background: #0b3d91;
+        color: white;
+        padding: 20px;
+        font-size: 26px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .story-block {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+        max-width: 800px;
+        margin: auto;
+        margin-bottom: 20px;
+        font-size: 18px;
+        line-height: 1.7;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.6s ease;
+    }
+
+    .story-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .money-img {
+        width: 180px;
+        margin: 20px auto;
+        display: block;
+    }
+
+    .example-box {
+        background: #e9f2ff;
+        border-left: 6px solid #0b3d91;
+        padding: 15px;
+        text-align: left;
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+
+    .button {
+        background: #0b3d91;
+        padding: 12px 20px;
+        border-radius: 8px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+    .button:hover {
+        background: #002f6b;
+    }
+
+    /* Simulator section */
+    .sim-box {
+        background: #fffbe9;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #ffd15c;
+        margin-top: 20px;
+    }
+
+    input {
+        padding: 10px;
+        width: 80%;
+        margin: 10px;
+        border-radius: 8px;
+        border: 1px solid #bbb;
+    }
+
+    #simResult {
+        font-size: 20px;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #0b3d91;
+    }
+
+    .home-btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 12px 20px;
+        background: #0b3d91;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+
+<header>💰 Understanding Interest — The Magic of Growing Money</header>
+
+<div id="story1" class="story-block">
+    Interest is the **extra money** you earn *just by keeping money safely in a bank or investment*.
+    <br><br>
+    Imagine planting a tiny tree. Every month, it grows a little.
+    <br>
+    That’s exactly what interest does to your money!
+    <img src="moneygrow.jpeg" alt="Money Growing" class="money-img">
+</div>
+
+<div id="story2" class="story-block">
+    There are **two types of interest** you’ll see everywhere in life:
+    <br><br>
+    ✔ Simple Interest  
+    ✔ Compound Interest  
+    <br>
+    Let’s break them down in the easiest way possible.
+</div>
+
+<div id="story3" class="story-block">
+    <h3>📘 Simple Interest</h3>
+    Simple interest gives you **the same amount every year**.
+    
+    <div class="example-box">
+        Example:  
+        You invest **₹1,000** at **10% simple interest** for **1 year**.  
+        <br><br>
+        You earn **₹100**.  
+        <br><br>
+        Total = ₹1,100
+    </div>
+
+    It’s simple. It’s predictable.  
+    But…
+</div>
+
+<div id="story4" class="story-block">
+    <h3>🔥 Compound Interest — The Real Beast</h3>
+    This is where money **grows on its own… and then grows MORE on the money it already grew.**
+    <br><br>
+    Called: **Interest on Interest**
+    
+    <img src="images/money_stack.png" class="money-img">
+    
+    Example:
+    <div class="example-box">
+        You invest **₹1,000** at **10%**:  
+        Year 1: ₹1,000 ➜ ₹1,100  
+        Year 2: ₹1,100 ➜ ₹1,210  
+        Year 3: ₹1,210 ➜ ₹1,331  
+    </div>
+
+    See how it jumps?  
+    This is why rich people stay rich.
+</div>
+
+<div id="story5" class="story-block">
+    <h2>🧪 Try the Interest Simulator</h2>
+
+    <div class="sim-box">
+        <input type="number" id="principal" placeholder="Enter amount (₹)">
+        <input type="number" id="rate" placeholder="Interest rate %">
+        <input type="number" id="years" placeholder="Years">
+
+        <button class="button" onclick="calc()">Calculate Compound Interest</button>
+
+        <div id="simResult"></div>
+    </div>
+</div>
+
+<a href="index.html" class="home-btn">⬅ Back to Home</a>
+
+<script>
+    // Scroll reveal
+    const blocks = document.querySelectorAll(".story-block");
+    window.addEventListener("scroll", () => {
+        blocks.forEach(block => {
+            const rect = block.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 80) {
+                block.classList.add("story-visible");
+            }
+        });
+    });
+
+    // Simulator
+    function calc() {
+        let P = parseFloat(document.getElementById("principal").value);
+        let r = parseFloat(document.getElementById("rate").value) / 100;
+        let t = parseFloat(document.getElementById("years").value);
+
+        if (!P || !r || !t) {
+            document.getElementById("simResult").innerText = "Please enter valid numbers.";
+            return;
+        }
+
+        let A = P * Math.pow((1 + r), t);
+
+        document.getElementById("simResult").innerHTML =
+            `Final Amount: <br> <span style="color:#ff8a00">₹${A.toFixed(2)}</span>`;
+    }
+</script>
+
+</body>
+</html>

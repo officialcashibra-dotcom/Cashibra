@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Start Learning – Pixel Knight</title>
+
+<style>
+/* Pixel style (keeps your pixel theme) */
+@font-face {
+  font-family: PixelFont;
+  src: local('Courier New'), local(monaco), local(monospaced); /* fallback */
+}
+body {
+  margin:0;
+  background:#111;
+  color:#fff;
+  font-family: PixelFont, monospace;
+}
+header{
+  padding:18px;
+  background:#060606;
+  color:#6aff6a;
+  text-align:center;
+  font-weight:700;
+  border-bottom:3px solid #3bff3b;
+}
+.container{max-width:920px;margin:34px auto;text-align:center;padding:0 14px;}
+.knight{width:140px;margin:auto;image-rendering:pixelated;animation:float 2s ease-in-out infinite;}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+.speech-box{
+  margin-top:18px;
+  background:#000;
+  border:4px solid #4dff4d;
+  padding:18px;
+  text-align:left;
+  max-width:680px;margin-left:auto;margin-right:auto;font-size:14px;
+}
+input{
+  margin-top:12px;
+  padding:10px;
+  border:3px solid #00eaff;
+  background:#000;color:#0ff;border-radius:4px;width:48%;
+  font-family:inherit;font-size:14px;
+}
+button{
+  margin-top:16px;padding:10px 18px;border:3px solid #ffcc00;background:#000;color:#ffcc00;
+  cursor:pointer;font-family:inherit;border-radius:6px;
+}
+button:hover{background:#ffcc00;color:#000}
+#lessons{margin-top:22px}
+.lesson{
+  background:#000;border:4px solid #00ffea;padding:14px;margin:14px auto;border-radius:6px;max-width:760px;text-align:left;
+}
+.topic-btn{
+  display:block;width:100%;text-align:left;padding:10px 12px;margin-top:8px;border:none;border-radius:4px;
+  background:#0066cc;color:#fff;cursor:pointer;font-weight:700;
+}
+.topic-btn:hover{background:#2380ff}
+h2{color:#6aff6a}
+@media(max-width:640px){ input{width:100%} .speech-box{font-size:13px} }
+</style>
+</head>
+<body>
+
+<header>
+  Cashibra — learn
+  <nav style="margin-top:10px;">
+    <a href="index.html" style="color:white; margin:0 10px;">Home</a>
+    <a href="about.html" style="color:white; margin:0 10px;">About</a>
+    <a href="bossbattle.html" style="color:white; margin:0 10px;">Boss Battle</a>
+    <a href="faq.html" style="color:white; margin:0 10px;">FAQ</a>
+    <a href="Learn.html" style="color:white; margin:0 10px;">Start Learning(demo) </a>
+ </nav>
+</header>
+
+<div class="container">
+  <!-- Pixel Knight image -->
+  <img class="knight" src="knight.jpeg" alt="Pixel Knight">
+
+  <!-- Dialogue -->
+  <div id="dialogue" class="speech-box">
+    🛡️ <strong>Greetings, young adventurer!</strong><br><br>
+    Tell me your <strong>LEVEL (AGE)</strong> — enter your age (10–19) and press BEGIN QUEST.
+  </div>
+
+  <!-- Age input -->
+  <input id="ageInput" type="number" placeholder="Enter Level (Age 10–19)" min="10" max="19" />
+  <button id="beginBtn">BEGIN QUEST →</button>
+
+  <!-- Lessons area (filled by JS) -->
+  <div id="lessons"></div>
+</div>
+
+<script>
+/* Global go() function used by your buttons */
+function go(page){
+  // basic safety: ensure page is string
+  if(!page || typeof page !== 'string') return;
+  window.location.href = page;
+}
+
+/* Function that renders the exact lesson buttons you gave (unchanged text) */
+function showLessonsFromAge(age){
+  const box = document.getElementById('lessons');
+
+  // Keep the same wording & buttons you asked for (no random)
+  if(age >= 10 && age <= 12){
+    box.innerHTML = `
+      <h2>Finance for Age 10–12 🟦</h2>
+
+      <div class="lesson">
+        <button class="topic-btn" onclick="go('money_basics.html')">
+          What is Money & Why We Use It
+        </button>
+
+        <button class="topic-btn" onclick="go('needs_vs_wants.html')">
+          Needs vs Wants
+        </button>
+
+        <button class="topic-btn" onclick="go('saving_basics.html')">
+          Saving vs Spending
+        </button>
+
+        <button class="topic-btn" onclick="go('kids_bank.html')">
+          How Banks Work (Kids Version)
+        </button>
+
+        <button class="topic-btn" onclick="go('pocket_money.html')">
+          Smart Pocket Money Use
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  if(age >= 13 && age <= 15){
+    box.innerHTML = `
+      <h2>Finance for Age 13–15 🟩</h2>
+
+      <div class="lesson">
+        <button class="topic-btn" onclick="go('budgeting_teen.html')">
+          Budgeting Your Money
+        </button>
+
+        <button class="topic-btn" onclick="go('digital_payments.html')">
+          What is Digital Payment (UPI, Cards)
+        </button>
+
+        <button class="topic-btn" onclick="go('interest_explained.html')">
+          How Interest Works
+        </button>
+
+        <button class="topic-btn" onclick="go('investing_intro.html')">
+          Basics of Investing
+        </button>
+
+        <button class="topic-btn" onclick="go('scam_awareness.html')">
+          Avoiding Online Scams
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  if(age >= 16 && age <= 19){
+    box.innerHTML = `
+      <h2>Advanced Teen Finance (16–19) 🔥</h2>
+
+      <div class="lesson">
+        <button class="topic-btn" onclick="go('credit_cards.html')">
+          Credit Cards (APR, Billing Cycle)
+        </button>
+
+        <button class="topic-btn" onclick="go('tax_basics.html')">
+          Taxes Basics (ITR, Deductions)
+        </button>
+
+        <button class="topic-btn" onclick="go('salary_structure.html')">
+          Salary Structure (CTC, HRA, PF)
+        </button>
+
+        <button class="topic-btn" onclick="go('investing101.html')">
+          Investing 101 (SIP, ELSS, Mutual Funds)
+        </button>
+
+        <button class="topic-btn" onclick="go('build_credit_score.html')">
+          How to Build Credit Score at 18+
+        </button>
+
+        <button class="topic-btn" onclick="go('budget_planner.html')">
+          Create Your First Budget
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  box.innerHTML = '<p style="color:#ff6666">⚠️ Age not supported. Enter between 10 and 19.</p>';
+}
+
+/* Hook up the Begin button */
+document.getElementById('beginBtn').addEventListener('click', ()=>{
+  const ageVal = parseInt(document.getElementById('ageInput').value, 10);
+  const dialog = document.getElementById('dialogue');
+
+  if(Number.isNaN(ageVal) || ageVal < 10 || ageVal > 19){
+    dialog.innerHTML = "⚠️ That is not a valid level, explorer! Please enter an age between 10 and 19.";
+    document.getElementById('lessons').innerHTML = '';
+    return;
+  }
+
+  // friendly knight message
+  dialog.innerHTML = "⚔️ Very well, brave warrior... These quests match your power level!";
+  // render EXACT lessons
+  showLessonsFromAge(ageVal);
+});
+
+/* Optional: allow Enter key in input to trigger Begin */
+document.getElementById('ageInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') document.getElementById('beginBtn').click();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boss Battle Demo</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      color: black;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      background: #0b3d91;
+      color: white;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    /* 🔥 Boss animation — jumps up & down */
+    @keyframes jumpBoss {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+      100% { transform: translateY(0); }
+    }
+
+    .boss-box {
+      background: #ff3b3b;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: jumpBoss 1.3s infinite ease-in-out;
+      color: white;
+      font-weight: bold;
+    }
+
+    .options {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    button.option {
+      padding: 15px;
+      background: #e0e0e0;
+      border: none;
+      color: black;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    button.option:hover {
+      background: #cccccc;
+    }
+
+    .correct {
+      background: #21c021 !important;
+      color: white !important;
+    }
+
+    .wrong {
+      background: #d02020 !important;
+      color: white !important;
+    }
+
+    #nextBtn {
+      display: none;
+      margin-top: 30px;
+      padding: 12px 20px;
+      font-size: 18px;
+      background: #0b3d91;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    a.home-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 20px;
+      background: #0b3d91;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Cashibra — Demo Battle Area
+</header>
+
+<div class="boss-box">
+  <h2 id="questionText">Loading question...</h2>
+
+  <div class="options">
+    <button class="option" onclick="checkAnswer(0)" id="opt0">Option 1</button>
+    <button class="option" onclick="checkAnswer(1)" id="opt1">Option 2</button>
+    <button class="option" onclick="checkAnswer(2)" id="opt2">Option 3</button>
+  </div>
+
+  <button id="nextBtn" onclick="nextQuestion()">Next Question</button>
+</div>
+
+<a href="index.html" class="home-btn">⬅ Back To Home</a>
+
+<script>
+  const questions = [
+    { q: "What is the fastest way to earn money online?", o: ["Scams", "Hard work & skills", "Nothing"], c: 1 },
+    { q: "Best age to start learning money skills?", o: ["18", "21", "Any age"], c: 2 },
+    { q: "What does credit score measure?", o: ["Trustworthiness", "Height", "Age"], c: 0 },
+    { q: "What is safer?", o: ["Random apps", "Trusted websites", "Unknown links"], c: 1 },
+    { q: "What is not a job?", o: ["Freelancing", "Sleeping", "Business"], c: 1 },
+    { q: "Which is better for teens?", o: ["Skill building", "Time waste", "Scams"], c: 0 },
+    { q: "What is investment?", o: ["Putting money to grow", "Shopping", "Losing cash"], c: 0 },
+    { q: "Best tool to learn?", o: ["YouTube", "Nothing", "Gambling"], c: 0 },
+    { q: "Which is risky?", o: ["Gambling", "Studying", "Saving"], c: 0 },
+    { q: "How to avoid scams?", o: ["Click everything", "Verify sources", "Trust strangers"], c: 1 }
+  ];
+
+  let current = 0;
+
+  function loadQuestion() {
+    const q = questions[current];
+    document.getElementById("questionText").innerText = q.q;
+    document.getElementById("opt0").innerText = q.o[0];
+    document.getElementById("opt1").innerText = q.o[1];
+    document.getElementById("opt2").innerText = q.o[2];
+
+    document.querySelectorAll(".option").forEach(btn => {
+      btn.classList.remove("correct", "wrong");
+      btn.disabled = false;
+    });
+
+    document.getElementById("nextBtn").style.display = "none";
+  }
+
+  function checkAnswer(selected) {
+    const q = questions[current];
+    const correct = q.c;
+
+    document.querySelectorAll(".option").forEach((btn, idx) => {
+      btn.disabled = true;
+      if (idx === correct) btn.classList.add("correct");
+      else if (idx === selected) btn.classList.add("wrong");
+    });
+
+    document.getElementById("nextBtn").style.display = "block";
+  }
+
+  function nextQuestion() {
+    current++;
+    if (current >= questions.length) {
+      document.getElementById("questionText").innerText = "🎉 You defeated the boss!";
+      document.querySelectorAll(".option").forEach(btn => btn.style.display = "none");
+      document.getElementById("nextBtn").style.display = "none";
+      return;
+    }
+    loadQuestion();
+  }
+
+  loadQuestion();
+</script>
+
+</body>
+</html>

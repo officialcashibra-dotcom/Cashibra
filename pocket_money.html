@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pocket Money Guide</title>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f4ff;
+    margin: 0;
+    padding: 20px;
+    color: #000;
+  }
+
+  header {
+    background: #0b3d91;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  .section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    max-width: 900px;
+    margin: auto;
+    margin-bottom: 25px;
+  }
+
+  h2 {
+    color: #0b3d91;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    line-height: 1.7;
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+
+  .quote {
+    background: #e7edff;
+    padding: 15px;
+    border-left: 5px solid #0b3d91;
+    border-radius: 8px;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  .fun-box {
+    background: #ffe28a;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #4b3a00;
+    margin-top: 20px;
+  }
+
+  /* Interactive Game */
+  .game-box {
+    margin-top: 30px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  #gameQuestion {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .game-btn {
+    padding: 12px 18px;
+    background: #0b3d91;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+
+  .game-btn:hover {
+    background: #093274;
+  }
+
+  #gameResult {
+    margin-top: 15px;
+    font-size: 19px;
+    font-weight: bold;
+  }
+
+  .correct { color: green; }
+  .wrong { color: red; }
+</style>
+</head>
+<body>
+
+<header>Pocket Money — Smart Guide</header>
+
+<div class="section">
+  <h2>What is Pocket Money?</h2>
+  <p>Pocket money is the small amount your parents give you weekly or monthly. It's your first step into learning how to manage real money!</p>
+
+  <div class="quote">“Pocket money is not about how much you get… it’s about how smart you use it.”</div>
+</div>
+
+<div class="section">
+  <h2>How to Use Pocket Money Smartly</h2>
+  <p>✔ Save a little every week</p>
+  <p>✔ Spend only on things you actually need</p>
+  <p>✔ Track where your money goes</p>
+  <p>✔ Set tiny goals like buying a book, game skin, or gift</p>
+</div>
+
+<div class="fun-box">💡 Fun Tip: Try the 50-30-20 rule! (50% Needs, 30% Wants, 20% Savings)</div>
+
+<div class="game-box">
+  <div id="gameQuestion">Loading question...</div>
+  <button class="game-btn" onclick="choose(0)" id="btn0">Option 1</button>
+  <button class="game-btn" onclick="choose(1)" id="btn1">Option 2</button>
+  <button class="game-btn" onclick="choose(2)" id="btn2">Option 3</button>
+
+  <div id="gameResult"></div>
+</div>
+
+<script>
+  const quiz = [
+    { q: "You want to buy a toy. What should you do?", o: ["Buy immediately", "Save weekly until you can buy it", "Beg to buy"], c: 1 },
+    { q: "Where should most of your pocket money go?", o: ["Savings & needs", "some Snacks some savings", "Spend none"], c: 0 },
+    { q: "What is a WANT?", o: ["snacks", "School books", "Water bottle"], c: 0 },
+  ];
+
+  let qIndex = 0;
+
+  function loadQ() {
+    const q = quiz[qIndex];
+    document.getElementById('gameQuestion').innerText = q.q;
+    document.getElementById('btn0').innerText = q.o[0];
+    document.getElementById('btn1').innerText = q.o[1];
+    document.getElementById('btn2').innerText = q.o[2];
+    document.getElementById('gameResult').innerText = "";
+  }
+
+  function choose(option) {
+    const correct = quiz[qIndex].c;
+    const result = document.getElementById('gameResult');
+
+    if (option === correct) {
+      result.innerHTML = "✔ Correct! You're learning fast!";
+      result.className = "correct";
+    } else {
+      result.innerHTML = "✘ Oops! Try again!";
+      result.className = "wrong";
+    }
+
+    qIndex = (qIndex + 1) % quiz.length;
+    setTimeout(loadQ, 1500);
+  }
+
+  loadQ();
+</script>
+
+</body>
+</html>

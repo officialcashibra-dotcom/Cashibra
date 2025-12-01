@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scam Awareness for Teens</title>
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: #0b0b0b;
+    color: #fff;
+    margin: 0;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 38px;
+    margin-top: 20px;
+    color: #ff4444;
+    text-shadow: 0 0 20px red;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .card {
+    background: #141414;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 14px;
+    border: 1px solid #ff4444;
+    box-shadow: 0 0 15px rgba(255,0,0,0.35);
+  }
+
+  .card h2 {
+    color: #ff6666;
+    margin-top: 0;
+  }
+
+  .example {
+    background: #1a1a1a;
+    margin-top: 15px;
+    padding: 15px;
+    border-left: 4px solid #ff4444;
+  }
+
+  .alert {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0% { color: #ff4444; }
+    50% { color: #ff9999; }
+    100% { color: #ff4444; }
+  }
+
+  .option {
+    background: #222;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ff4444;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .option:hover {
+    transform: scale(1.03);
+  }
+
+  .wrong {
+    background: #ff3d3d !important;
+  }
+
+  .right {
+    background: #00ff88 !important;
+  }
+
+  .btn {
+    background: #ff4444;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    color: #fff;
+    margin-top: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: #ff6666;
+  }
+
+  .fake-chat {
+    background: #1b1b1b;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid #ff6666;
+  }
+
+  .msg {
+    padding: 7px;
+    margin: 6px 0;
+    border-radius: 6px;
+  }
+
+  .msg.scammer {
+    background: #ff333340;
+    border-left: 3px solid #ff4444;
+  }
+
+  .msg.you {
+    background: #333;
+    border-left: 3px solid #888;
+  }
+</style>
+</head>
+
+<body>
+<h1>🚨 Scam Awareness 101</h1>
+
+<div class="container">
+
+  <!-- What scams are -->
+  <div class="card">
+    <h2>What is a Scam?</h2>
+    <p>
+      A scam is when someone tricks you into giving **money**, **passwords**,  
+      **OTP**, **UPI approval**, or **personal details**.  
+    </p>
+    <p class="alert"><b>Rule #1: Never share OTP. Never approve unknown UPI requests.</b></p>
+  </div>
+
+  <!-- Types of scams -->
+  <div class="card">
+    <h2>Common Teen Scams 🔥</h2>
+
+    <div class="example"><b>1. Free Robux / Free Game Currency</b><br>
+      They ask: "Send ₹10 to verify and you get 1000 Robux".  
+      **100% scam.**
+    </div>
+
+    <div class="example"><b>2. Fake UPI Payment</b><br>
+      Scammer sends a <i>collect request</i> that looks like:  
+      <b>“You will receive ₹5,000. Approve to claim.”</b>  
+      But approving actually makes YOU pay.
+    </div>
+
+    <div class="example"><b>3. Fake Instagram Giveaways</b><br>
+      "You won! Pay ₹200 delivery fee."  
+      Cap. Scam.
+    </div>
+
+    <div class="example"><b>4. Fake Job Offers</b><br>
+      “Pay ₹500 for registration.”  
+      No real job asks money.
+    </div>
+
+  </div>
+
+  <!-- Interactive fake chat -->
+  <div class="card">
+    <h2>Interactive: Spot the Scam 💬</h2>
+
+    <div class="fake-chat">
+      <div class="msg scammer">Hey! You won FREE iPhone! Just pay ₹300 delivery! 😁</div>
+      <div class="msg scammer">Send on UPI: iphone@gift</div>
+      <div class="msg you">Ummm…</div>
+    </div>
+
+    <p><b>Is this a scam?</b></p>
+
+    <div class="option" onclick="wrong(this)">No, looks real</div>
+    <div class="option" onclick="rightAns(this)">Yes, it's a scam</div>
+
+  </div>
+
+  <!-- Real scam simulator -->
+  <div class="card">
+    <h2>UPI Scam Simulator ⚠️</h2>
+
+    <p>You receive a UPI request saying:</p>
+    <div class="example">
+      <b>You will receive ₹2,000</b><br>
+      (but actually it’s a “collect money” request)
+    </div>
+
+    <button class="btn" onclick="alert('Correct! Never approve money requests from strangers.')">
+      Decline Request
+    </button>
+
+    <button class="btn" onclick="alert('❌ Wrong! Approving sends YOUR money to them!')">
+      Approve Request
+    </button>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card">
+    <h2>Quick Scam Quiz 🎯</h2>
+    <p><b>Someone asks for your OTP. What do you do?</b></p>
+
+    <div class="option" onclick="rightAns(this)">Never share it</div>
+    <div class="option" onclick="wrong(this)">Share it only with friends</div>
+    <div class="option" onclick="wrong(this)">Give it if they say from bank</div>
+  </div>
+
+</div>
+
+<script>
+  function wrong(x) {
+    x.classList.add("wrong");
+  }
+  function rightAns(x) {
+    x.classList.add("right");
+  }
+</script>
+
+</body>
+</html>

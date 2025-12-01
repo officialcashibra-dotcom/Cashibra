@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teen Budgeting Planner</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6ff;
+            color: #1a1a1a;
+        }
+        header {
+            background: #4b6cff;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #4b6cff;
+        }
+        .input-box {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d0d4ff;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        button {
+            background: #4b6cff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #394fcc;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: #eef0ff;
+            border-radius: 12px;
+            display: none;
+        }
+        .fun-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff7d1;
+            border-radius: 12px;
+            display: none;
+        }
+        .emoji {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>Teen Budgeting Planner — Interactive</header>
+
+    <div class="container">
+        <div class="section-title">1. Enter Your Monthly Pocket Money</div>
+        <div class="input-box">
+            <input type="number" id="pocket" placeholder="e.g., 1500 INR">
+        </div>
+
+        <div class="section-title">2. Enter Your Monthly Expenses</div>
+        <div class="input-box">
+            <input type="number" id="snacks" placeholder="Snacks & outings (e.g., 400)">
+            <br><br>
+            <input type="number" id="games" placeholder="Gaming / Subscriptions (e.g., 300)">
+            <br><br>
+            <input type="number" id="travel" placeholder="Travel / School stuff (e.g., 200)">
+        </div>
+
+        <button onclick="calculateBudget()">Calculate My Budget</button>
+
+        <div class="result-box" id="result"></div>
+        
+        <div class="fun-box" id="funBox"></div>
+    </div>
+
+    <script>
+        function calculateBudget() {
+            let pocket = Number(document.getElementById('pocket').value);
+            let snacks = Number(document.getElementById('snacks').value);
+            let games = Number(document.getElementById('games').value);
+            let travel = Number(document.getElementById('travel').value);
+
+            if (!pocket || !snacks || !games || !travel) {
+                alert('Fill all fields!');
+                return;
+            }
+
+            let totalSpent = snacks + games + travel;
+            let savings = pocket - totalSpent;
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+
+            if (savings >= 0) {
+                resultDiv.innerHTML = `
+                    <h3>Summary</h3>
+                    <p>Total spent: <b>${totalSpent}</b></p>
+                    <p>Leftover savings: <b>${savings}</b></p>
+                    <p>You did well! Keep saving wisely. 💪</p>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <h3>Summary</h3>
+                    <p>Total spent: <b>${totalSpent}</b></p>
+                    <p>You overspent by <b>${Math.abs(savings)}</b> 😬</p>
+                    <p>Try reducing one expense next month!</p>
+                `;
+            }
+
+            showFunBox(savings);
+        }
+
+        function showFunBox(savings) {
+            let fun = document.getElementById('funBox');
+            fun.style.display = 'block';
+
+            if (savings > 300) {
+                fun.innerHTML = `
+                    <h3>🎉 Fun Result</h3>
+                    <p class="emoji">😎🔥</p>
+                    <p>You saved like an absolute PRO! You unlocked the level: <b>Money Master</b>.</p>
+                `;
+            } else if (savings >= 0) {
+                fun.innerHTML = `
+                    <h3>👍 Fun Result</h3>
+                    <p class="emoji">😊💰</p>
+                    <p>Decent savings! You're on the right track.</p>
+                `;
+            } else {
+                fun.innerHTML = `
+                    <h3>⚠️ Fun Result</h3>
+                    <p class="emoji">😅💸</p>
+                    <p>You overspent! Next month: try avoiding impulse buying.</p>
+                `;
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Basics of Investing</title>
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #0e0e0e;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 40px;
+      color: #00ff88;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px #00ff88;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 20px;
+      border: 1px solid #00ff88;
+      box-shadow: 0px 0px 15px #00ff88;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #00ffaa;
+    }
+
+    .example-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-left: 4px solid #00ffaa;
+      background: #111;
+    }
+
+    button {
+      background: #00ff88;
+      color: black;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #00ffaa;
+    }
+
+    .quiz-box {
+      margin-top: 20px;
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #00ffaa;
+    }
+
+    .option {
+      background: #222;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid #00ff88;
+    }
+
+    .wrong {
+      background: #ff4d4d !important;
+    }
+    .right {
+      background: #00ff88 !important;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>📈 Investing Basics</h1>
+
+    <div class="card">
+      <h2>What is Investing?</h2>
+      <p>
+        Investing is when you put your money somewhere with the hope that it will
+        grow over time.  
+        It’s like planting a money-seed 🌱 today and watching it become a money-tree 🌳 later.
+      </p>
+
+      <div class="example-box">
+        <b>Simple Example:</b><br>
+        If you invest ₹1000 in something that grows 10% every year,<br>
+        Next year you will have **₹1100**.<br>
+        Your money made **money**.  
+        That’s investing.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Where Can You Invest?</h2>
+      <ul>
+        <li>📌 Stocks</li>
+        <li>📌 Mutual Funds</li>
+        <li>📌 SIP (Systematic Investment Plan)</li>
+        <li>📌 Gold</li>
+        <li>📌 Fixed Deposits</li>
+        <li>📌 Real Estate</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Interactive Growth Simulator 💹</h2>
+      <p>Enter money and see how much it becomes after 5 years (10% growth):</p>
+
+      <input id="amt" type="number" placeholder="Enter amount (₹)" style="width:100%;padding:10px;border-radius:8px;border:none;margin-top:10px;">
+      <button onclick="calc()">Calculate</button>
+
+      <p id="result" style="font-size:20px;margin-top:10px;color:#00ffaa;"></p>
+
+      <script>
+        function calc() {
+          let a = Number(document.getElementById("amt").value);
+          if (a <= 0) {
+            document.getElementById("result").innerHTML = "Enter a valid amount!";
+            return;
+          }
+          let total = a * 1.1 * 1.1 * 1.1 * 1.1 * 1.1; // 5 years compound
+          document.getElementById("result").innerHTML = 
+            "After 5 years: <b>₹" + Math.round(total) + "</b>";
+        }
+      </script>
+    </div>
+
+    <div class="card">
+      <h2>Quick Quiz 🎯</h2>
+      <div class="quiz-box">
+        <p><b>What does investing mean?</b></p>
+
+        <div class="option" onclick="wrong(this)">Buying chips every day</div>
+        <div class="option" onclick="rightAns(this)">Putting money to grow over time</div>
+        <div class="option" onclick="wrong(this)">Keeping all money in a drawer</div>
+      </div>
+
+      <script>
+        function wrong(x) {
+          x.classList.add("wrong");
+        }
+        function rightAns(x) {
+          x.classList.add("right");
+        }
+      </script>
+    </div>
+
+  </div>
+
+</body>
+</html>

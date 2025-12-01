@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cashibra — FAQ</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f4ff;
+    margin: 0;
+    color: #000;
+  }
+
+  header {
+    background: #0b3d91;
+    padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+  }
+
+  .faq-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .faq-box {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .faq-box:hover {
+    transform: scale(1.02);
+  }
+
+  .faq-question {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0b3d91;
+  }
+
+  .faq-answer {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  a.home-btn {
+    display: block;
+    width: 200px;
+    margin: 40px auto;
+    text-align: center;
+    padding: 12px 20px;
+    background: #0b3d91;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  Cashibra — Home
+  <nav style="margin-top:10px;">
+    <a href="index.html" style="color:white; margin:0 10px;">Home</a>
+    <a href="about.html" style="color:white; margin:0 10px;">About</a>
+    <a href="bossbattle.html" style="color:white; margin:0 10px;">Boss Battle</a>
+    <a href="faq.html" style="color:white; margin:0 10px;">FAQ</a>
+    <a href="Learn.html" style="color:white; margin:0 10px;">Start Learning(demo) </a>
+ </nav>
+</header>
+
+
+<div class="faq-container">
+
+  <div class="faq-box" onclick="toggleFAQ(this)">
+    <div class="faq-question">What is Cashibra?</div>
+    <div class="faq-answer">Cashibra is a fun learning project where kids and teens learn money, skills, and financial basics through games and challenges.</div>
+  </div>
+
+  <div class="faq-box" onclick="toggleFAQ(this)">
+    <div class="faq-question">Is this website real or still in development?</div>
+    <div class="faq-answer">This is a demo/testing version. More features like battles, points, and missions will be added later.</div>
+  </div>
+
+  <div class="faq-box" onclick="toggleFAQ(this)">
+    <div class="faq-question">Is Cashibra safe?</div>
+    <div class="faq-answer">Yes, the website does not collect any sensitive data. Everything here is only for education and testing.</div>
+  </div>
+
+  <div class="faq-box" onclick="toggleFAQ(this)">
+    <div class="faq-question">Will I really earn money?</div>
+    <div class="faq-answer">No real money is given. This is a learning and demo website to teach financial skills in a fun way.</div>
+  </div>
+
+  <div class="faq-box" onclick="toggleFAQ(this)">
+    <div class="faq-question">Who is the creator?</div>
+    <div class="faq-answer">Cashibra was created by a 12 year old learner (Aarav Mahule) who wanted to teach financial skills to other teens.</div>
+  </div>
+
+</div>
+
+<a class="home-btn" href="index.html">⬅ Back To Home</a>
+
+<script>
+function toggleFAQ(box) {
+  const answer = box.querySelector('.faq-answer');
+  const isOpen = answer.style.display === "block";
+  answer.style.display = isOpen ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

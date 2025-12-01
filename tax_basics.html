@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tax Basics — Cashibra</title>
+<style>
+  :root{
+    --bg:#f4f7ff; --card:#fff; --accent:#0b3d91; --muted:#566;
+  }
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#0b2340}
+  header{background:var(--accent);color:#fff;padding:18px 20px;font-weight:700}
+  .wrap{max-width:920px;margin:28px auto;padding:18px}
+  .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(11,61,145,0.06);margin-bottom:18px}
+  h1{margin:0 0 8px 0;color:var(--accent)}
+  h2{color:#0b3d91;margin:8px 0}
+  p{line-height:1.6}
+  .example{background:#eef4ff;border-left:4px solid var(--accent);padding:12px;border-radius:8px;margin-top:12px}
+  label{display:block;margin-top:10px;font-weight:700;color:var(--muted)}
+  input[type=number]{width:100%;padding:10px;border-radius:8px;border:1px solid #d5e3ff;margin-top:6px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .col{flex:1;min-width:180px}
+  button{margin-top:12px;padding:10px 14px;border-radius:10px;border:none;background:var(--accent);color:#fff;cursor:pointer}
+  .result{margin-top:12px;padding:12px;border-radius:8px;background:#f1fbf5;border:1px solid #cfeedc;color:#0a6b2f;font-weight:700}
+  small{color:var(--muted)}
+  a.back{display:inline-block;margin-top:14px;color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+
+<header>Cashibra — Tax Basics</header>
+
+<div class="wrap">
+  <div class="card">
+    <h1>What is Income Tax?</h1>
+    <p>Income tax is money people pay to the government from the income they earn (salary, freelancing, interest, etc.). Governments use taxes for services like schools, roads and hospitals.</p>
+
+    <div class="example">
+      <b>Quick idea:</b> If you earn ₹50,000 a year, and the tax rate on your bracket is 10%, you pay ₹5,000 tax (before considering deductions).
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Terms you should know</h2>
+    <p><b>Gross Income:</b> All money you received before any deductions.<br>
+       <b>Deductions:</b> Amounts subtracted from gross income — e.g. standard deduction, student allowances, some investments.<br>
+       <b>Taxable Income:</b> Gross income minus deductions. Tax is calculated on this number.</p>
+  </div>
+
+  <div class="card">
+    <h2>A simple progressive tax example</h2>
+    <p>To keep the lesson clear we use a simple slab system (example only — change to real country slabs if needed):</p>
+    <ul>
+      <li>0% on income up to ₹2,50,000</li>
+      <li>5% on income between ₹2,50,001 — ₹5,00,000</li>
+      <li>10% on income between ₹5,00,001 — ₹10,00,000</li>
+      <li>15% on income above ₹10,00,000</li>
+    </ul>
+
+    <div style="margin-top:12px">
+      <label>Enter your annual gross income (₹)</label>
+      <input id="gross" type="number" placeholder="e.g., 300000" />
+      <label>Enter total deductions (₹) — investments, standard deduction, etc.</label>
+      <input id="deduct" type="number" placeholder="e.g., 50000" />
+      <button onclick="estimateTax()">Estimate Tax</button>
+
+      <div id="taxResult" class="result" style="display:none"></div>
+      <small>Note: This is an educational calculator with example slabs. Use real local slabs for precise tax planning.</small>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>How tax is calculated (step-by-step)</h2>
+    <p>1) Start with Gross Income → 2) Subtract Deductions → 3) Apply slab rates to the taxable income in pieces → 4) Add health/education cess if applicable (not shown in this simple example).</p>
+  </div>
+
+  <a class="back" href="index.html">⬅ Back to Home</a>
+</div>
+
+<script>
+function estimateTax(){
+  const gross = Number(document.getElementById('gross').value) || 0;
+  const deduct = Number(document.getElementById('deduct').value) || 0;
+  const taxable = Math.max(0, gross - deduct);
+  let tax = 0;
+  // example slabs:
+  // 0 - 250k: 0%
+  // 250001 - 500k: 5%
+  // 500001 - 1,000k: 10%
+  // >1,000k: 15%
+  let rem = taxable;
+
+  function slab(amount, rate){
+    const take = Math.max(0, Math.min(rem, amount));
+    tax += take * rate;
+    rem -= take;
+  }
+
+  slab(250000, 0);           // first 250k
+  slab(250000, 0.05);        // next 250k (250001 - 500k)
+  slab(500000, 0.10);        // next 500k (500001 - 1,000k)
+  if(rem > 0) tax += rem * 0.15;
+
+  tax = Math.round(tax);
+  const result = document.getElementById('taxResult');
+  result.style.display = 'block';
+  result.innerHTML = `Taxable income: ₹${taxable.toLocaleString()}<br>Estimated tax: ₹${tax.toLocaleString()}`;
+}
+</script>
+
+</body>
+</html>

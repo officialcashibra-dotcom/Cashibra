@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cashibra - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+highlight-box-section {
+  display: flex;
+  justify-content: center;
+  margin: 50px 20px;
+}
+
+.highlight-box {
+  background: linear-gradient(135deg, #0b3d91, #0056d6);
+  color: #fff;
+  padding: 40px 60px;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  max-width: 1600px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.highlight-box span {
+  color: #ffcc00;
+  font-size: 1.8em;
+}
+
+.highlight-box em {
+  display: block;
+  font-size: 0.9em;
+  font-weight: 400;
+  margin-top: 10px;
+  color: #e0e0e0;
+}
+
+.highlight-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body { background:#f0f4ff; color:#000; overflow-x:hidden; }
+
+header {
+  position:sticky; top:0; width:100%; background:#0b3d91; color:#fff; padding:20px 40px;
+  font-size:2em; font-weight:700; box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:1000;
+  display:flex; justify-content:space-between; align-items:center;
+}
+header nav a {
+  color:#fff; text-decoration:none; font-weight:700; margin-left:30px; font-size:1em;
+  transition:color 0.3s;
+}
+header nav a:hover { color:#ffd700; }
+
+.banner {
+  height:500px; background-size:cover; background-position:center;
+  display:flex; justify-content:center; align-items:center; position:relative; margin-bottom:50px;
+}
+.banner-text { background:rgba(0,0,0,0.6); padding:40px; text-align:center; color:#fff; border-radius:20px; }
+.banner-text h1{ font-size:3em; margin-bottom:20px; }
+.banner-text p{ font-size:1.5em; margin-bottom:20px; }
+.banner-text a{ display:inline-block; padding:20px 40px; font-size:1.5em; border-radius:25px; background:linear-gradient(135deg,#0b3d91,#0056d6); color:#fff; text-decoration:none; font-weight:700; transition:all 0.3s; }
+.banner-text a:hover{ background:linear-gradient(135deg,#ff6f00,#ffcc00); color:#000; transform:scale(1.1); }
+
+.section { max-width:1200px; margin:50px auto; padding:50px 20px; background:#fff; border-radius:20px; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
+.section h2{ font-size:2.5em; color:#0b3d91; margin-bottom:40px; text-align:center; }
+
+.promo-banner { height:300px; background-size:cover; background-position:center; border-radius:20px; margin-bottom:30px; display:flex; justify-content:center; align-items:center; position:relative; }
+.promo-text { background:rgba(0,0,0,0.6); padding:30px; text-align:center; color:#fff; border-radius:15px; }
+.promo-text h3{ font-size:2em; margin-bottom:15px; }
+.promo-text p{ font-size:1.2em; margin-bottom:15px; }
+.promo-text a{ display:inline-block; padding:15px 30px; font-size:1.2em; border-radius:25px; background:linear-gradient(135deg,#0b3d91,#0056d6); color:#fff; text-decoration:none; font-weight:700; transition:all 0.3s; }
+.promo-text a:hover{ background:linear-gradient(135deg,#ff6f00,#ffcc00); color:#000; transform:scale(1.1); }
+
+.features-grid { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
+.feature { flex:1 1 250px; background:#f0f4ff; padding:30px; border-radius:20px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.15); }
+.feature h3{ font-size:1.8em; margin-bottom:15px; color:#0b3d91; }
+.feature p{ font-size:1.1em; margin-bottom:20px; }
+.feature a{ display:inline-block; padding:15px 25px; font-size:1.1em; border-radius:25px; background:linear-gradient(135deg,#0b3d91,#0056d6); color:#fff; text-decoration:none; font-weight:700; transition:all 0.3s; }
+.feature a:hover{ background:linear-gradient(135deg,#ff6f00,#ffcc00); color:#000; transform:scale(1.05); }
+
+form { display:flex; flex-direction:column; gap:20px; max-width:500px; margin:auto; }
+input,textarea{ padding:12px; font-size:16px; border-radius:5px; border:1px solid #ccc; width:100%; }
+button{ padding:12px; font-size:18px; border:none; border-radius:5px; cursor:pointer; background:#0b3d91; color:#fff; font-weight:700; transition:all 0.3s; }
+button:hover{ background:#08306B; }
+
+footer { text-align:center; margin-top:50px; font-weight:700; color:#0b3d91; padding:20px 0; }
+
+@media(max-width:900px){
+  .features-grid { flex-direction:column; }
+  .banner-text h1{ font-size:2em; }
+  .banner-text p{ font-size:1.2em; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  Cashibra — Home
+  <nav style="margin-top:10px;">
+    <a href="index.html" style="color:white; margin:0 10px;">Home</a>
+    <a href="about.html" style="color:white; margin:0 10px;">About</a>
+    <a href="bossbattle.html" style="color:white; margin:0 10px;">Boss Battle</a>
+    <a href="faq.html" style="color:white; margin:0 10px;">FAQ</a>
+    <a href="Learn.html" style="color:white; margin:0 10px;">Start Learning(demo) </a>
+ </nav>
+</header>
+   
+<section class="banner" style="background-image:url('https://picsum.photos/1600/500?random=1');">
+  <div class="banner-text">
+    <h1>Welcome to Cashibra</h1>
+    <p>Learn about money, credit, and rewards the fun way!</p>
+    <a href="https://www.youtube.com/@Official_Cashibra" target="_blank">Visit Channel</a>
+  </div>
+</section>
+
+<section class="highlight-box-section">
+  <div class="highlight-box">
+    <div style="text-align:center;">
+    <p>💸 We make money <span>EASY</span> for teens <strong>10-19 years</strong> of age<br>
+   
+    <em>(this site is in developmental stage)</em></p>
+  </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Features </h2>
+  <div class="features-grid">
+    <div class="feature">
+      <h3>High Quality</h3>
+      <p>Content made to help kids learn real financial skills.</p>
+      <a href="https://www.youtube.com/@Official_Cashibra" target="_blank">Explore</a>
+    </div>
+    <div class="feature">
+      <h3>Regular Updates</h3>
+      <p>New videos and lessons every week.</p>
+      <a href="https://www.youtube.com/@Official_Cashibra" target="_blank">Check Now</a>
+    </div>
+    <div class="feature">
+      <h3>Earn Rewards</h3>
+      <p>Planing to have Points, badges, and safe practice credit cards for teens.</p>
+      <a href="https://www.youtube.com/@Official_Cashibra" target="_blank">Learn More</a>
+    </div>
+  </div>
+</section>
+<centre>
+<a href="learn.html" 
+   style="
+      display:inline-block;
+      padding:12px 22px;
+      background:#4CAF50;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-size:18px;
+      margin-top:20px;
+   ">
+   Start Learning
+</a>
+</centre>
+
+<footer>© 2025 Cashibra | <a href="https://www.youtube.com/@Official_Cashibra" target="_blank">Visit our Channel</a></footer>
+
+</body>
+</html>
