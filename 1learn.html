@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cashibra Demo App</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #f5f7fa;
+        overflow-x: hidden;
+    }
+
+    section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 0.6s ease-out;
+    }
+
+    .show {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    .button {
+        margin-top: 30px;
+        background: #4b7bec;
+        color: white;
+        padding: 15px 40px;
+        font-size: 1.4rem;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s ease;
+    }
+
+    .button:hover {
+        background: #3867d6;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 500px) {
+        h1 {
+            font-size: 2.4rem;
+        }
+        .button {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- SECTION 1 – HI -->
+<section id="s1">
+    <h1 class="anim">Hi 👋</h1>
+</section>
+
+<!-- SECTION 2 – HELLO -->
+<section id="s2">
+    <h1 class="anim">Hello There 👀</h1>
+</section>
+
+<!-- SECTION 3 – FINAL BUTTON -->
+<section id="s3">
+    <h1 class="anim">Welcome to Cashibra</h1>
+    <a href="learn.html" class="button">Start Learning</a>
+</section>
+
+<script>
+    // Reveal animation when scrolling
+    const elements = document.querySelectorAll('.anim');
+
+    function reveal() {
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 50) {
+                el.classList.add('show');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', reveal);
+    reveal(); // trigger on load
+</script>
+
+</body>
+</html>
